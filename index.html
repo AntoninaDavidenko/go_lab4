@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 4</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h1 class="mb-4">Лабораторна робота 4</h1>
+                        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link {{if eq .ActiveTab " task1"}}active{{end}}" data-bs-toggle="tab" href="#task1">Завдання 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{if eq .ActiveTab " task2"}}active{{end}}" data-bs-toggle="tab" href="#task2">Завдання 2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{if eq .ActiveTab " task3"}}active{{end}}" data-bs-toggle="tab" href="#task3">Завдання 3</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- Task 1 -->
+                            <div class="tab-pane fade {{if eq .ActiveTab " task1"}}show active{{end}}" id="task1">
+                                <form method="post">
+                                    <input type="hidden" name="task" value="1">
+                                    <input type="hidden" name="activeTab" value="task1">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="ik" name="ik" placeholder="Струм КЗ" required>
+                                                <label for="ik">Струм КЗ, кА</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="tf" name="tf" placeholder="Фіктивний час" required>
+                                                <label for="tf">Фіктивний час вимикання струму КЗ, с</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="sm" name="sm" placeholder="Sm" required>
+                                                <label for="sm">Sm, кВ</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="tm" name="tm" placeholder="Tm" required>
+                                                <label for="tm">Tm, год</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary">Розрахувати</button>
+                                    </div>
+                                </form>
+
+                                {{ if .Task1Result }}
+                                <div class="mt-4">
+                                    <div class="alert alert-info">
+                                        {{ .TaskOne.Result }}
+                                    </div>
+                                </div>
+                                {{ end }}
+                            </div>
+
+                            <!-- Task 2 -->
+                            <div class="tab-pane fade {{if eq .ActiveTab " task2"}}show active{{end}}" id="task2">
+                                <form method="post">
+                                    <input type="hidden" name="task" value="2">
+                                    <input type="hidden" name="activeTab" value="task2">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="s" name="s" placeholder="Потужність" required>
+                                                <label for="s">Потужність</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary">Розрахувати</button>
+                                    </div>
+                                </form>
+
+                                {{ if .Task2Result }}
+                                <div class="mt-4">
+                                    <div class="alert alert-info">
+                                        {{ .TaskTwo.Result }}
+                                    </div>
+                                </div>
+                                {{ end }}
+                            </div>
+
+                            <!-- Task 3 -->
+                            <div class="tab-pane fade {{if eq .ActiveTab " task3"}}show active{{end}}" id="task3">
+                                <form method="post">
+                                    <input type="hidden" name="task" value="3">
+                                    <input type="hidden" name="activeTab" value="task3">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="rcn" name="rcn" placeholder="Rс.н" required>
+                                                <label for="rcn">Rс.н, Ом</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="xcn" name="xcn" placeholder="Xс.н" required>
+                                                <label for="xcn">Xс.н, Ом</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="rcmin" name="rcmin" placeholder="Rс.min" required>
+                                                <label for="rcmin">Rс.min, Ом</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="number" step="0.01" class="form-control" id="xcmin" name="xcmin" placeholder="Xс.min" required>
+                                                <label for="xcmin">Xс.min, Ом</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary">Розрахувати</button>
+                                    </div>
+                                </form>
+
+                                {{ if .Task3Result }}
+                                <div class="mt-4">
+                                    <div class="alert alert-info">
+                                        <pre class="mb-0">{{ .TaskThree.Result }}</pre>
+                                    </div>
+                                </div>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var activeTab = '{{.ActiveTab}}';
+            if (activeTab) {
+                var tab = document.querySelector('a[href="#' + activeTab + '"]');
+                if (tab) {
+                    new bootstrap.Tab(tab).show();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
